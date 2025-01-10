@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- Custom header / footer format views for reports -->
+        <template id="gad_custom_external_layout">
+            <t t-if="not o" t-set="o" t-value="doc"/>
+                <t t-if="not company">
+                    <!-- Multicompany -->
+                    <t t-if="company_id">
+                        <t t-set="company" t-value="company_id"/>
+                    </t>
+                    <t t-elif="o and 'company_id' in o">
+                        <t t-set="company" t-value="o.company_id.sudo()"/>
+                    </t>
+                    <t t-else="else">
+                        <t t-set="company" t-value="res_company"/>
+                    </t>
+                </t>
+                <t t-call="jm_gad_documents.gad_custom_external_layout_header_footer"><t t-raw="0"/></t>
+        </template>
+        <template id="gad_custom_external_layout_header_footer">            
+            <div class="header" style="font-family: 'Roboto', sans-serif;">
+                <!--
+                <div class="row">
+                    <div class="col-3" align="left">
+                        <img class="pull-left" width="50" height="50" alt="set company logo" align="left" t-attf-src="data:image/png;base64, #{company.logo}"/>
+                    </div>
+                    <div class="col-9 text-right txt-bold" style="font-weight: bold; font-size:10.3pt;">
+                        <b>"All stores are different, but some are more different than others"</b>
+                    </div>
+                </div>
+                
+                <div style="margin-top:1% ;width:100%; border-bottom:2px solid black"/>
+                -->
+            </div>
+            <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <t t-raw="0"/>
+            </div>
+
+            <div class="footer o_standard_footer" style="">
+                <style>
+
+                    @font-face {
+                        font-family: 'LatoBlack';
+                        src: url('/jm_gad_reports/static/src/fonts/Lato-Bold.ttf') format('truetype');
+
+                    }
+                    @font-face {
+                        font-family: 'LatoLight';
+                        src: url('/jm_gad_reports/static/src/fonts/Lato-Light.ttf') format('truetype');
+
+                    }
+
+                    .tblack {
+                        font-family: 'Lato', sans-serif!important;
+                        color:#040404!important;
+                        font-weight: 300;
+                        font-style: normal;
+                    }
+                    
+                    * {
+                        font-family: 'Lato', sans-serif!important;
+                        color:#040404!important;
+                        font-weight: 100;
+                        font-style: normal;
+                    }
+                    
+                </style>
+                
+                <div class="container" style="">
+                    <div class="row">
+                        <div class="col-12 text-center" style="text-align:center;margin:auto">
+                            <span>Página</span>
+                            <span class="page" />
+                            de
+                            <span class="topage" />
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>

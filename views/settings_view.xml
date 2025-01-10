@@ -1,0 +1,68 @@
+<odoo>
+    
+
+    <record id="view_shipping_address_tree" model="ir.ui.view">
+        <field name="name">shipping.address.tree</field>
+        <field name="model">shipping.address</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="street"/>
+                <field name="city"/>
+                <field name="state_id"/>
+                <field name="zip"/>
+                <field name="country_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_shipping_address_form" model="ir.ui.view">
+        <field name="name">shipping.address.form</field>
+        <field name="model">shipping.address</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name"/>
+                    <field name="street"/>
+                    <field name="city"/>
+                    <field name="state_id"/>
+                    <field name="zip"/>
+                    <field name="country_id"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_shipping_address" model="ir.actions.act_window">
+        <field name="name">Shipping Addresses</field>
+        <field name="res_model">shipping.address</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_shipping_address_tree"/>
+    </record>
+
+
+    <record id="view_company_form_inherit_shipping_link" model="ir.ui.view">
+        <field name="name">res.company.form.inherit.shipping.link</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <!-- Add the link inside the 'General Information' tab after the social media group -->
+            <xpath expr="//group[@name='social_media']" position="before">
+                <div class="mt-3">
+                    <button type="action" name="%(action_shipping_address)d" class="btn btn-link" string="Manage Shipping Addresses"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    
+
+    <menuitem id="menu_shipping_address" 
+          name="Shipping Addresses"
+          parent="base.menu_administration"
+          action="action_shipping_address"
+          sequence="10"/>
+
+
+
+</odoo>
