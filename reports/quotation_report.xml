@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <data>
-        <template id="gad_report_custom_quotation">
+        <template id="martydev_report_custom_quotation">
             <t t-call="web.html_container">    
                 <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)"/>
                 <t t-set="company" t-value="doc.company_id"/>
-                <t t-call="jm_gad_documents.gad_custom_external_layout">
+                <t t-call="jm_martydev.martydev_custom_external_layout">
                     <div class="page" style="min-height:850px;">
                         <div class="oe_structure"/>
                         <style>
@@ -29,7 +29,7 @@
                             }
                             
                             * {
-                                font-family: 'Lato', sans-serif!important;
+                                
                                 color:#040404!important;
                                 font-weight: 100;
                                 font-style: normal;
@@ -69,8 +69,9 @@
                                 </div>
                                 <div class="col-4" style="padding-left:15px;">
 
-
+                                    <!--
                                     <span style="font-weight:100;margin-bottom:5px;"><t t-esc="doc.company_id.name"/></span><br/>
+                                    -->
                                     <span><t t-esc="doc.company_id.street"/></span><br/>
                                     <span><t t-esc="doc.company_id.street2"/></span><br/>
                                     <span><t t-esc="doc.company_id.state_id.name"/>, <t t-esc="doc.company_id.country_id.name"/>
@@ -78,7 +79,7 @@
                                     <span>Tel: <t t-esc="doc.company_id.phone"/></span><br/>
                                     <span>Email: <t t-esc="doc.company_id.email"/></span><br/>
                                     <span>URL: <t t-esc="doc.company_id.website"/></span><br/>
-                                    <span>RNC: <t t-esc="doc.company_id.vat"/></span>
+                                    <span>Cédula: <t t-esc="doc.company_id.vat"/></span>
                                     
                                     
                                     
@@ -92,23 +93,20 @@
 
 
 
-                        <hr style="height: 2px;background: #d12c2a;border: 0;"/>
+                        <hr style="height: 2px;background: #366fef;border: 0;"/>
 
                         <div class="row mb-4 mt-2" style="border:2px solid:red!important;">
                             <div class="col-8">
                                 <p class="tblack">Cliente: <t t-esc="doc.partner_id.name"/></p>
                                 <p style="">Dirección: <t t-esc="doc.partner_id.street"/>, <t t-esc="doc.partner_id.street2"/></p>
                             </div>
-                            <div class="col-4" style="padding-left:10px;">
-                                <p style="">RNC: <t t-esc="doc.partner_id.vat"/></p>
-                                <p t-if="doc.custom_po">
-                                    Orden de Compra: <t t-esc="doc.custom_po"/>
-                                </p>                  
+                            <div class="col-4" style="padding-left:10px;">                                
+                                <p t-if="doc.partner_id.vat" style="">RNC: <t t-esc="doc.partner_id.vat"/></p>
                                 <p style="">Contacto: <t t-esc="doc.partner_id.phone"/></p>
                             </div>
                         </div>
 
-                        <hr style="height: 2px;background: #d12c2a;border: 0;"/>
+                        <hr style="height: 2px;background: #366fef;border: 0;"/>
 
                        
 
@@ -135,19 +133,19 @@
                         <table class="mt-4 table">
                             <tr>
                                 <!--
-                                <td style="background:#d12c2a;text-align:center;border: 2px solid #d12c2a;">Cant.</td>
+                                <td style="background:#366fef;text-align:center;border: 2px solid #366fef;">Cant.</td>
                                 -->
-                                <td style="background:#d12c2a;text-align:center;color:#fff!important;">Descripción</td>
+                                <td style="background:#366fef;text-align:center;color:#fff!important;vertical-align:middle;">Descripción</td>
 
 
-                                <td style="background:#d12c2a;text-align:center;color:#fff!important;">Cant.</td>
+                                <td style="background:#366fef;text-align:center;color:#fff!important;vertical-align:middle;">Cant.</td>
 
-                                <td style="background:#d12c2a;text-align:center;color:#fff!important;">Precio Unit.</td>
-                                <td style="background:#d12c2a;text-align:center;color:#fff!important;" name="th_discount" t-if="display_discount" class="text-center" groups="product.group_discount_per_so_line">
+                                <td style="background:#366fef;text-align:center;color:#fff!important;vertical-align:middle;">Precio Unit.</td>
+                                <td style="background:#366fef;text-align:center;color:#fff!important;vertical-align:middle;" name="th_discount" t-if="display_discount" class="text-center" groups="product.group_discount_per_so_line">
                                     Desc.%
                                 </td>
-                                <td style="background:#d12c2a;text-align:center;color:#fff!important;">ITBIS</td>
-                                <td style="background:#d12c2a;text-align:center;color:#fff!important;">Total</td>
+                                <td style="background:#366fef;text-align:center;color:#fff!important;vertical-align:middle;">ITBIS</td>
+                                <td style="background:#366fef;text-align:center;color:#fff!important;vertical-align:middle;">Total</td>
                             </tr>
                             <!--
                             <tr>
@@ -170,7 +168,7 @@
                                 <tr t-att-class="'bg-200 fw-bold o_line_section' if line.display_type == 'line_section' else 'fst-italic o_line_note' if line.display_type == 'line_note' else ''">
                                     <t t-if="not line.display_type">
                                         <!--
-                                        <td style="border: 2px solid #d12c2a;vertical-align: middle;" name="td_quantity" class="text-center">
+                                        <td style="border: 2px solid #366fef;vertical-align: middle;" name="td_quantity" class="text-center">
                                             <span t-field="line.product_uom_qty"/>
                                             <span t-field="line.product_uom"/>
                                         </td>
@@ -191,7 +189,7 @@
                                         </td>
                                         
                                         <td style="vertical-align: middle;" name="td_priceunit" class="text-center">
-                                            <span t-field="line.price_unit"/>
+                                            <span t-field="line.price_unit" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
                                         </td>
                                         <td style="vertical-align: middle;" t-if="display_discount" class="text-center" groups="product.group_discount_per_so_line">
                                             <span t-field="line.discount"/>
@@ -200,8 +198,7 @@
                                             <span t-out="', '.join(map(lambda x: (x.description or x.name), line.tax_id))"/>
                                         </td>
                                         <td style="vertical-align: middle;" t-if="not line.is_downpayment" name="td_subtotal" class="text-center o_price_total">
-                                            <span t-field="line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
-                                            <span t-field="line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                                            <span t-field="line.price_subtotal"></span>
                                         </td>
                                     </t>
                                     <t t-elif="line.display_type == 'line_section'">
@@ -270,7 +267,7 @@
                                                     
                                                     <span
                                                         t-out="doc.amount_undiscounted"
-                                                        t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'
+                                                        t-options='{"widget": "monetary", "display_currency": doc.currency_id}'
                                                         style="float:right;"
                                                     />
                                                 </td>
@@ -282,7 +279,7 @@
                                                     <t t-set="amount_discount" t-value="doc.amount_undiscounted - doc.amount_untaxed"/>
                                                     <span
                                                         t-out="amount_discount"
-                                                        t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'
+                                                        t-options='{"widget": "monetary", "display_currency": doc.currency_id}'
                                                         style="float:right;"
                                                     />
                                                 </td>
@@ -385,7 +382,7 @@
         <template id="report_custom_quotation">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="doc">
-                    <t t-call="jm_gad_documents.gad_report_custom_quotation" t-lang="doc.partner_id.lang"/>
+                    <t t-call="jm_martydev.martydev_report_custom_quotation" t-lang="doc.partner_id.lang"/>
                 </t>
             </t>
         </template>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="paperformat_custom_gad" model="report.paperformat">
-            <field name="name">Gad Documents</field>
+        <record id="paperformat_custom_martydev" model="report.paperformat">
+            <field name="name">Martydev Documents</field>
             <field name="default" eval="True"/>
             <field name="format">Letter</field>
             <field name="orientation">Portrait</field>
@@ -15,54 +15,26 @@
             <field name="dpi">90</field>
         </record>
 
-        <record id="paperformat_custom_gad_t" model="report.paperformat">
-            <field name="name">Gad Documents Timbrada</field>
-            <field name="default" eval="True"/>
-            <field name="format">Letter</field>
-            <field name="orientation">Portrait</field>
-            <field name="margin_top">45</field>
-            <field name="margin_bottom">15</field>
-            <field name="margin_left">7</field>
-            <field name="margin_right">7</field>
-            <field name="header_line" eval="False"/>
-            <field name="header_spacing">45</field>
-            <field name="dpi">90</field>
+        <record id="martydev_account_quotation_normal" model="ir.actions.report">
+            <field name="name">Cotización MartyDev</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="paperformat_id" ref="paperformat_custom_martydev"/>
+            <field name="report_name">jm_martydev.report_custom_quotation</field>
+            <field name="report_file">jm_martydev.report_custom_quotation</field>
+            <field name="print_report_name">(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or 'Order - %s' % (object.name)</field>
+            <field name="binding_model_id" ref="sale.model_sale_order"/>
+            <field name="binding_type">report</field>
         </record>
 
-
-        <report
-            id="sale.gad_account_quotation_normal"
-            model="sale.order"
-            string="Cotizacion Hardware"
-            report_type="qweb-pdf"
-            name="jm_gad_documents.report_custom_quotation"
-            file="jm_gad_documents.report_custom_quotation"
-            attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"
-            paperformat="paperformat_custom_gad"
-            print_report_name="(object._get_report_base_filename())"
-            groups="account.group_account_invoice"
-        />
-
-        <report
-            id="sale.gad_account_quotation_t"
-            model="sale.order"
-            string="Cotizacion de Etiquetas"
-            report_type="qweb-pdf"
-            name="jm_gad_documents.report_custom_quotation_t"
-            file="jm_gad_documents.report_custom_quotation_t"
-            attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"
-            paperformat="paperformat_custom_gad"
-            print_report_name="(object._get_report_base_filename())"
-            groups="account.group_account_invoice"
-        />
-
+        <!--
         <report
             id="purchase.gad_account_purchase_order"
             model="purchase.order"
             string="Orden de Compra - Gad"
             report_type="qweb-pdf"
-            name="jm_gad_documents.report_custom_po"
-            file="jm_gad_documents.report_custom_po"
+            name="jm_martydev.report_custom_po"
+            file="jm_martydev.report_custom_po"
             attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"
             paperformat="paperformat_custom_gad"
             print_report_name="(object._get_report_base_filename())"
@@ -74,8 +46,8 @@
             model="stock.picking"
             string="Conduce - Gad"
             report_type="qweb-pdf"
-            name="jm_gad_documents.report_custom_sp"
-            file="jm_gad_documents.report_custom_sp"
+            name="jm_martydev.report_custom_sp"
+            file="jm_martydev.report_custom_sp"
             attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"
             paperformat="paperformat_custom_gad"
             print_report_name="'Delivery Slip - %s - %s' % (object.partner_id.name or '', object.name)"
@@ -87,26 +59,15 @@
             model="account.move"
             string="Factura - Gad"
             report_type="qweb-pdf"
-            name="jm_gad_documents.report_custom_invoice"
-            file="jm_gad_documents.report_custom_invoice"
+            name="jm_martydev.report_custom_invoice"
+            file="jm_martydev.report_custom_invoice"
             attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"
             paperformat="paperformat_custom_gad"
             print_report_name="(object._get_report_base_filename())"
             groups="account.group_account_invoice"
         />
 
-        <report
-            id="account.gad_account_invoice_noh"
-            model="account.move"
-            string="Factura sin Header - Gad"
-            report_type="qweb-pdf"
-            name="jm_gad_documents.report_custom_invoice_noh"
-            file="jm_gad_documents.report_custom_invoice_noh"
-            attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"
-            paperformat="paperformat_custom_gad_t"
-            print_report_name="(object._get_report_base_filename())"
-            groups="account.group_account_invoice"
-        />
+        -->
 
         
 

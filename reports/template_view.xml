@@ -2,7 +2,7 @@
 <odoo>
     <data>
         <!-- Custom header / footer format views for reports -->
-        <template id="gad_custom_external_layout">
+        <template id="martydev_custom_external_layout">
             <t t-if="not o" t-set="o" t-value="doc"/>
                 <t t-if="not company">
                     <!-- Multicompany -->
@@ -16,9 +16,9 @@
                         <t t-set="company" t-value="res_company"/>
                     </t>
                 </t>
-                <t t-call="jm_gad_documents.gad_custom_external_layout_header_footer"><t t-raw="0"/></t>
+                <t t-call="jm_martydev.martydev_custom_external_layout_header_footer"><t t-raw="0"/></t>
         </template>
-        <template id="gad_custom_external_layout_header_footer">            
+        <template id="martydev_custom_external_layout_header_footer">            
             <div class="header" style="font-family: 'Roboto', sans-serif;">
                 <!--
                 <div class="row">
@@ -67,17 +67,19 @@
                     
                 </style>
                 
-                <div class="container" style="">
-                    <div class="row">
-                        <div class="col-12 text-center" style="text-align:center;margin:auto">
+                
+                    <div class="row" style="border-top:2px solid #366fef;padding-top:10px;">
+                        <div class="col-6 text-left" style="text-align:left;">
                             <span>Página</span>
                             <span class="page" />
                             de
                             <span class="topage" />
                         </div>
-                        
+                        <div class="col-6 text-right" style="text-align:right;">
+                            <img class="" width="150" height="auto" alt="logo" align="right" t-attf-src="data:image/png;base64, #{company.logo}"/>
+                        </div>
                     </div>
-                </div>
+               
             </div>
         </template>
     </data>
