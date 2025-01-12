@@ -44,14 +44,14 @@
                         <div class="row mb-4 mt-2" style="margin-top:-20px;">
                             <div class="row">
                                 <div class="col-4">
-                                    <strong style="font-size:22px;" t-esc="doc.company_id.name" />
+                                    <strong style="font-size:22px;color:#fff!important;" t-esc="doc.company_id.name" />
                                     <img class="" width="275" height="auto" alt="logo" align="left" t-attf-src="data:image/png;base64, #{company.logo}"/>
                                     <br/>
                                     <t t-if="doc.state not in ['sale']">
-                                        <span class="tblack" style="color:#000;font-size: 22px;font-weight:900;">Cotización</span><br/>
+                                        <span class="tblack" style="color:#0d2f7d!important;font-size: 22px;font-weight:900;">Cotización</span><br/>
                                     </t>
                                     <t t-else="">
-                                        <span class="tblack" style="color:#000;font-size: 22px;font-weight:900;">Pedido de Venta</span><br/>
+                                        <span class="tblack" style="color:#0d2f7d!important;font-size: 22px;font-weight:900;">Pedido de Venta</span><br/>
                                     </t>                                    
                                     <span class="tblack" style="font-size: 22px;font-weight:900;" t-esc="doc.name"/>
                                 </div>
@@ -60,11 +60,11 @@
 
                                 <div class="col-4 text-right" style="text-align:right;padding-right:15px;padding-top:50px">
                                     <p>
-                                        <strong class="tblack">Fecha: </strong><t t-esc="doc.date_order" t-options="{'widget': 'date'}"/><br/>
+                                        <strong class="tblack"><span style="color:#0d2f7d!important;">Fecha: </span></strong><t t-esc="doc.date_order" t-options="{'widget': 'date'}"/><br/>
                                         <t t-if="doc.validity_date">
-                                            <strong class="tblack">Válida Hasta: </strong><t t-esc="doc.validity_date" t-options="{'widget': 'date'}"/><br/>
+                                            <strong class="tblack"><span style="color:#0d2f7d!important;">Válida Hasta: </span></strong><t t-esc="doc.validity_date" t-options="{'widget': 'date'}"/><br/>
                                         </t>
-                                        <strong class="tblack">Creado por: </strong><t t-esc="doc.user_id.name"/>
+                                        <strong class="tblack"><span style="color:#0d2f7d!important;">Creado por: </span></strong><t t-esc="doc.user_id.name"/>
                                     </p>                                    
                                 </div>
                                 <div class="col-4" style="padding-left:15px;">
@@ -78,7 +78,7 @@
                                     </span><br/>
                                     <span>Tel: <t t-esc="doc.company_id.phone"/></span><br/>
                                     <span>Email: <t t-esc="doc.company_id.email"/></span><br/>
-                                    <span>URL: <t t-esc="doc.company_id.website"/></span><br/>
+                                    <span>Website: <t t-esc="doc.company_id.website"/></span><br/>
                                     <span>Cédula: <t t-esc="doc.company_id.vat"/></span>
                                     
                                     
@@ -97,12 +97,23 @@
 
                         <div class="row mb-4 mt-2" style="border:2px solid:red!important;">
                             <div class="col-8">
-                                <p class="tblack">Cliente: <t t-esc="doc.partner_id.name"/></p>
-                                <p style="">Dirección: <t t-esc="doc.partner_id.street"/>, <t t-esc="doc.partner_id.street2"/></p>
+                                <p class="tblack">
+                                    <span style="color:#0d2f7d!important;">Cliente:</span> <t t-esc="doc.partner_id.name"/><br/>
+                                    <span style="color:#0d2f7d!important;">Dirección:</span> <t t-esc="doc.partner_id.street"/>, <t t-esc="doc.partner_id.street2"/><br/>
+                                    <t t-if="doc.partner_id.vat">
+                                        <span style="color:#0d2f7d!important;">RNC:</span> <t t-esc="doc.partner_id.vat"/><br/>
+                                    </t>
+                                    <span style="color:#0d2f7d!important;">Contacto:</span> <t t-esc="doc.partner_id.phone"/>
+                                </p>
                             </div>
-                            <div class="col-4" style="padding-left:10px;">                                
-                                <p t-if="doc.partner_id.vat" style="">RNC: <t t-esc="doc.partner_id.vat"/></p>
-                                <p style="">Contacto: <t t-esc="doc.partner_id.phone"/></p>
+
+                            <div class="col-4" style="padding-left:10px;">
+                                <p style="" class="tblack">
+                                    <span style="color:#0d2f7d!important;">No. Cotización:</span> <t t-esc="doc.name"/><br/>
+                                    <span style="color:#0d2f7d!important;">Fecha de Creación:</span> <t t-esc="doc.date_order" t-options="{'widget': 'date'}"/><br/>
+                                    <span style="color:#0d2f7d!important;">Fecha de Vencimiento:</span> <t t-esc="doc.validity_date" t-options="{'widget': 'date'}"/>                                    
+                                </p>
+                                
                             </div>
                         </div>
 
@@ -144,7 +155,7 @@
                                 <td style="background:#366fef;text-align:center;color:#fff!important;vertical-align:middle;" name="th_discount" t-if="display_discount" class="text-center" groups="product.group_discount_per_so_line">
                                     Desc.%
                                 </td>
-                                <td style="background:#366fef;text-align:center;color:#fff!important;vertical-align:middle;">ITBIS</td>
+                                <td t-if="doc.display_ITBIS" style="background:#366fef;text-align:center;color:#fff!important;vertical-align:middle;">ITBIS</td>
                                 <td style="background:#366fef;text-align:center;color:#fff!important;vertical-align:middle;">Total</td>
                             </tr>
                             <!--
@@ -185,7 +196,7 @@
 
 
                                         <td style="vertical-align: middle;" name="td_quantity" class="text-center">
-                                            <span t-field="line.product_uom_qty"/>
+                                            <span t-out="int(line.product_uom_qty)"/>
                                         </td>
                                         
                                         <td style="vertical-align: middle;" name="td_priceunit" class="text-center">
@@ -194,7 +205,7 @@
                                         <td style="vertical-align: middle;" t-if="display_discount" class="text-center" groups="product.group_discount_per_so_line">
                                             <span t-field="line.discount"/>
                                         </td>
-                                        <td style="vertical-align: middle;" name="td_taxes" class="text-center">
+                                        <td  t-if="doc.display_ITBIS" style="vertical-align: middle;" name="td_taxes" class="text-center">
                                             <span t-out="', '.join(map(lambda x: (x.description or x.name), line.tax_id))"/>
                                         </td>
                                         <td style="vertical-align: middle;" t-if="not line.is_downpayment" name="td_subtotal" class="text-center o_price_total">
@@ -261,7 +272,7 @@
                                     <table class="table" width="100%;">
                                         <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
                                             
-                                            <tr>
+                                            <tr t-if="display_discount">
                                                 <td style="background:#FFF;">
                                                     Monto sin Descuento
                                                     
@@ -273,7 +284,7 @@
                                                 </td>
                                             </tr>
 
-                                            <tr>
+                                            <tr t-if="display_discount">
                                                 <td style="background:#FFF;">
                                                     Monto Descontado
                                                     <t t-set="amount_discount" t-value="doc.amount_undiscounted - doc.amount_untaxed"/>
@@ -305,7 +316,7 @@
                                             
 
                                             <t t-foreach="tax_totals['groups_by_subtotal'][subtotal_to_show]" t-as="amount_by_group">
-                                                <tr>
+                                                <tr t-if="doc.display_ITBIS">
                                                     <t t-if="tax_totals['display_tax_base']">
                                                         <td style="background:#FFF;">
                                                             <span t-esc="amount_by_group['tax_group_name']"/>
@@ -335,14 +346,14 @@
                                         
                                         <tr class="">
                                             <t t-if="has_rounding">
-                                                <td style="background:#FFF;">
-                                                    Total
+                                                <td style="background:#FFF;font-size:16px!important;">
+                                                    <span style="font-size:16px!important;">Total</span>
                                                     <span t-esc="tax_totals['formatted_amount_total']" style="float:right;"/> 
                                                 </td>
                                             </t>
                                             <t t-else="">
-                                                <td  style="background:#FFF;">
-                                                    Total
+                                                <td  style="background:#FFF;font-size:16px!important;">
+                                                    <span style="font-size:16px!important;">Total</span>
                                                     <span t-esc="tax_totals['formatted_amount_total']" style="float:right;"/> 
                                                 </td>
                                             </t>
@@ -350,8 +361,8 @@
                                         </tr>
                                          
                                         <tr t-if="has_rounding">
-                                            <td  style="background:#FFF;">
-                                                Total Redondeado
+                                            <td  style="background:#FFF;font-size:16px!important;">
+                                                <span style="font-size:16px!important;">Total Redondeado</span>
                                                 <span t-esc="tax_totals['formatted_amount_total_rounded']" style="float:right;"/>
                                             </td>
                                         </tr>

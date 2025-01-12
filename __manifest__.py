@@ -26,13 +26,14 @@
     #'qweb': ['static/src/xml/pos_ticket.xml'],
     'data': [
         'reports/template_view.xml',
-        #'reports/invoice_report.xml',
+        'reports/invoice_report.xml',
         #'reports/invoice_report_noh.xml',
         'reports/quotation_report.xml',
         #'reports/purchase_order.xml',
         #'reports/stock_picking.xml',
         'reports/view_report.xml',
-        #'views/product_view.xml',
+        'views/sale_order_view.xml',
+        'views/account_move_view.xml',
         #'security/ir.model.access.csv'
     ],
     'application': True,

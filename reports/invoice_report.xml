@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <data>
-        <template id="gad_report_custom_invoice">
+        <template id="martydev_report_custom_invoice">
             <t t-call="web.html_container">    
                 <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)"/>
                 <t t-set="print_with_payments" t-value="True"/>
                 <t t-set="company" t-value="doc.company_id"/>
-                <t t-call="jm_gad_documents.gad_custom_external_layout">
+                <t t-call="jm_martydev.martydev_custom_external_layout">
                     <div class="page" style="min-height:850px;">
                         <div class="oe_structure"/>
                         <style>
@@ -44,17 +44,17 @@
                         <div class="row mb-4 mt-2" style="margin-top:-20px;">
                             <div class="row">
                                 <div class="col-4">
-                                    <strong style="font-size:22px;" t-esc="doc.company_id.name"/>
+                                    <strong style="font-size:22px;color:#fff!important;" t-esc="doc.company_id.name"/>
                                     <img class="" width="275" height="auto" alt="logo" align="left" t-attf-src="data:image/png;base64, #{company.logo}"/>
                                     <br/>
                                     
-                                    <span class="tblack" style="color:#000;font-size: 36px;font-weight:300;" t-if="doc.move_type == 'out_invoice' and doc.state == 'posted'">Factura</span>
-                                    <span class="tblack" style="color:#000;font-size: 36px;font-weight:300;" t-if="doc.move_type == 'out_invoice' and doc.state == 'draft'">Borrador de Factura</span>
-                                    <span class="tblack" style="color:#000;font-size: 36px;font-weight:300;" t-if="doc.move_type == 'out_invoice' and doc.state == 'cancel'">Factura Cancelada</span>
-                                    <span class="tblack" style="color:#000;font-size: 36px;font-weight:300;" t-if="doc.move_type == 'out_refund'">Nota de Crédito</span>
-                                    <span class="tblack" style="color:#000;font-size: 28px;font-weight:300;" t-if="doc.move_type == 'in_refund'">Nota de Crédito al Vendedor</span>
-                                    <span class="tblack" style="color:#000;font-size: 28px;font-weight:300;" t-if="doc.move_type == 'in_invoice'">Factura al Vendedor</span><br/>
-                                    <div t-if="doc.l10n_latam_use_documents" style="text-transform:capitalize;">Crédito Fiscal</div>
+                                    <span class="tblack" style="color:#0d2f7d!important;font-size: 22px;font-weight:300;" t-if="doc.move_type == 'out_invoice' and doc.state == 'posted'">Factura</span>
+                                    <span class="tblack" style="color:#0d2f7d!important;font-size: 22px;font-weight:300;" t-if="doc.move_type == 'out_invoice' and doc.state == 'draft'">Borrador de Factura</span>
+                                    <span class="tblack" style="color:#0d2f7d!important;font-size: 22px;font-weight:300;" t-if="doc.move_type == 'out_invoice' and doc.state == 'cancel'">Factura Cancelada</span>
+                                    <span class="tblack" style="color:#0d2f7d!important;font-size: 22px;font-weight:300;" t-if="doc.move_type == 'out_refund'">Nota de Crédito</span>
+                                    <span class="tblack" style="color:#0d2f7d!important;font-size: 22px;font-weight:300;" t-if="doc.move_type == 'in_refund'">Nota de Crédito al Vendedor</span>
+                                    <span class="tblack" style="color:#0d2f7d!important;font-size: 22px;font-weight:300;" t-if="doc.move_type == 'in_invoice'">Factura al Vendedor</span><br/>
+                                    
 
 
 
@@ -65,27 +65,28 @@
 
                                 <div class="col-4 text-right" style="text-align:right;padding-right:15px;padding-top:50px">
                                     <p>
-                                        <strong class="tblack">Fecha: </strong><t t-esc="doc.invoice_date" t-options="{'widget': 'date'}"/><br/>
+                                        <strong class="tblack" style="color:#0d2f7d!important;">Fecha: </strong><t t-esc="doc.invoice_date" t-options="{'widget': 'date'}"/><br/>
                                         <!--
                                         <t t-if="doc.validity_date">
                                             <strong class="tblack">Valid Thru: </strong><t t-esc="doc.validity_date" t-options="{'widget': 'date'}"/><br/>
                                         </t>
                                         -->
-                                        <strong class="tblack">Creado por: </strong><t t-esc="doc.user_id.name"/>
+                                        <strong class="tblack" style="color:#0d2f7d!important;">Creado por: </strong><t t-esc="doc.user_id.name"/>
                                     </p>                                    
                                 </div>
                                 <div class="col-4" style="padding-left:15px;">
 
-
+                                    <!--
                                     <span style="font-weight:100;margin-bottom:5px;"><t t-esc="doc.company_id.name"/></span><br/>
+                                    -->
                                     <span><t t-esc="doc.company_id.street"/></span><br/>
                                     <span><t t-esc="doc.company_id.street2"/></span><br/>
                                     <span><t t-esc="doc.company_id.state_id.name"/>, <t t-esc="doc.company_id.country_id.name"/>
                                     </span><br/>
                                     <span>Tel: <t t-esc="doc.company_id.phone"/></span><br/>
                                     <span>Email: <t t-esc="doc.company_id.email"/></span><br/>
-                                    <span>URL: <t t-esc="doc.company_id.website"/></span><br/>
-                                    <span>RNC: <t t-esc="doc.company_id.vat"/></span>
+                                    <span>Website: <t t-esc="doc.company_id.website"/></span><br/>
+                                    <span>Cédula: <t t-esc="doc.company_id.vat"/></span>
                                     
                                     
                                     
@@ -99,36 +100,29 @@
 
 
 
-                        <hr style="height: 2px;background: #d12c2a;border: 0;"/>
+                        <hr style="height: 2px;background: #366fef;border: 0;"/>
 
                         <div class="row mb-4 mt-2" style="border:2px solid:red!important;">
                             <div class="col-8">
                                 <p class="tblack">
-                                    Cliente: <t t-esc="doc.partner_id.name"/><br/>
-                                    Dirección: <t t-esc="doc.partner_id.street"/>, <t t-esc="doc.partner_id.street2"/><br/>
-                                    RNC: <t t-esc="doc.partner_id.vat"/><br/>
-                                    Contacto: <t t-esc="doc.partner_id.phone"/>
-                            </p>
+                                    <span style="color:#0d2f7d!important;">Cliente:</span> <t t-esc="doc.partner_id.name"/><br/>
+                                    <span style="color:#0d2f7d!important;">Dirección:</span> <t t-esc="doc.partner_id.street"/>, <t t-esc="doc.partner_id.street2"/><br/>
+                                    <span style="color:#0d2f7d!important;">RNC:</span> <t t-esc="doc.partner_id.vat"/><br/>
+                                    <span style="color:#0d2f7d!important;">Contacto:</span> <t t-esc="doc.partner_id.phone"/>
+                                </p>
                             </div>
 
                             <div class="col-4" style="padding-left:10px;">
                                 <p style="" class="tblack">
-                                    <t t-if="doc.custom_po">
-                                        Orden de Compra: <t t-esc="doc.custom_po"/><br/>
-                                    </t>
-                                        No. Factura: <t t-esc="doc.name"/><br/>
-                                    <span class="tblack" t-if="doc.l10n_latam_use_documents">
-                                        NFC: <t t-esc="doc.l10n_do_fiscal_number"/><br/>
-                                        Válido hasta: <t t-esc="doc.l10n_do_ncf_expiration_date"/><br/>
-                                    </span>
-                                    <span class="tblack" t-if="doc.purchase_order_id">
-                                        Orden de Compra: <t t-esc="doc.purchase_order_id.name"/>
-                                    </span>
+                                    <span style="color:#0d2f7d!important;">No. Factura:</span> <t t-esc="doc.name"/><br/>
+                                    <span style="color:#0d2f7d!important;">Fecha de Factura:</span> <t t-esc="doc.invoice_date" t-options="{'widget': 'date'}"/><br/>
+                                    <span style="color:#0d2f7d!important;">Vencimiento Factura:</span> <t t-esc="doc.invoice_date_due" t-options="{'widget': 'date'}"/>                                    
                                 </p>
+                                
                             </div>
                         </div>
 
-                        <hr style="height: 2px;background: #d12c2a;border: 0;"/>
+                        <hr style="height: 2px;background: #366fef;border: 0;"/>
 
                         
 
@@ -140,14 +134,23 @@
                         
                         <table class="mt-4 table">
                             <tr class="tblack">
-                                <td class="tblack" style="background:#d12c2a;text-align:center;color:#fff!important;">Cant.</td>
-                                <td class="tblack" style="background:#d12c2a;text-align:center;color:#fff!important;">Descripción</td>
-                                <td class="tblack" style="background:#d12c2a;text-align:center;color:#fff!important;">Precio Unitario</td>
-                                <td style="background:#d12c2a;text-align:center;color:#fff!important;" name="th_discount" t-if="display_discount" class="tblack text-center" groups="product.group_discount_per_so_line">
+                                
+                                <td class="tblack" style="background:#366fef;text-align:center;color:#fff!important;vertical-align:middle;">Descripción</td>
+
+                                <td class="tblack" style="background:#366fef;text-align:center;color:#fff!important;vertical-align:middle;">Cant.</td>
+
+
+                                <td class="tblack" style="background:#366fef;text-align:center;color:#fff!important;vertical-align:middle;">Precio Unitario</td>
+                                
+                                <!--
+                                <td style="background:#366fef;text-align:center;color:#fff!important;vertical-align:middle;" name="th_discount" t-if="display_discount" class="tblack text-center" groups="product.group_discount_per_so_line">
                                     Desc.%
                                 </td>
-                                <td class="tblack" style="background:#d12c2a;text-align:center;color:#fff!important;">ITBIS</td>
-                                <td class="tblack" style="background:#d12c2a;text-align:center;color:#fff!important;">Importe</td>
+                                -->
+                                
+
+                                <td t-if="doc.display_ITBIS" class="tblack" style="background:#366fef;text-align:center;color:#fff!important;vertical-align:middle;">ITBIS</td>
+                                <td class="tblack" style="background:#366fef;text-align:center;color:#fff!important;vertical-align:middle;">Total</td>
                             </tr>                            
                             
 
@@ -167,35 +170,37 @@
 
                                     <tr t-att-class="'bg-200 fw-bold o_line_section' if line.display_type == 'line_section' else 'fst-italic o_line_note' if line.display_type == 'line_note' else ''">
                                         <t t-if="line.display_type == 'product'" name="account_invoice_line_accountable">
-                                            <td class="text-center" style="vertical-align: middle;">
-                                                <span t-field="line.quantity"/>
-                                                <span t-field="line.product_uom_id" groups="uom.group_uom"/>
-                                            </td>
-                                            <!--
-                                            <td style="vertical-align: middle;" name="account_invoice_line_name"><span t-field="line.name" t-options="{'widget': 'text'}"/></td>
-                                            -->
+                                            
+                                            
                                             <td style="vertical-align: middle;" name="account_invoice_line_name">
-                                                <t t-if="line.product_id.description_sale">
-                                                    <span t-field="line.product_id.description_sale" t-options="{'widget': 'text'}"/>
-                                                </t>
-                                                <t t-else="">
-                                                    <span t-field="line.product_id.name" t-options="{'widget': 'text'}"/>
-                                                </t>
                                                 
+                                                <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                                
+                                            </td>
+
+                                            <td class="text-center" style="vertical-align: middle;">
+                                                <span t-out="int(line.quantity)"/>
+                                                <span t-out="int(line.product_uom_id)" groups="uom.group_uom"/>
                                             </td>
                                             
                                             <td style="vertical-align: middle;" t-attf-class="text-center {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
-                                                <span class="text-nowrap" t-field="line.price_unit"/>
+                                                
+                                                <span class="text-nowrap" t-field="line.price_unit"
+                                                    t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.currency_id}"/>
                                             </td>
+
+                                            <!--
                                             <td style="vertical-align: middle;" t-if="display_discount" t-attf-class="text-center {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                                                 <span class="text-nowrap" t-field="line.discount"/>
                                             </td>
-                                            <td style="vertical-align: middle;" t-attf-class="text-center {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                            -->
+
+                                            <td t-if="doc.display_ITBIS" style="vertical-align: middle;" t-attf-class="text-center {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                                                 <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))" id="line_tax_ids"/>
                                             </td>
                                             <td style="vertical-align: middle;" class="text-end o_price_total">
                                                 <span class="text-nowrap" t-field="line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
-                                                <span class="text-nowrap" t-field="line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                                                <span class="text-nowrap" t-field="line.price_total"/>
                                             </td>
                                         </t>
                                         <t t-if="line.display_type == 'line_section'">
@@ -247,13 +252,13 @@
                                           <table class="table" name="invoice_snln_table">
                                               
                                                   <tr>
-                                                      <td class="tblack" style="background:#d12c2a;text-align:center;color:#fff!important;">
+                                                      <td class="tblack" style="background:#366fef;text-align:center;color:#fff!important;">
                                                         Producto
                                                       </td>
-                                                      <td class="tblack" style="background:#d12c2a;text-align:center;color:#fff!important;">
+                                                      <td class="tblack" style="background:#366fef;text-align:center;color:#fff!important;">
                                                         Cant.
                                                         </td>
-                                                      <td class="tblack" style="background:#d12c2a;text-align:center;color:#fff!important;">
+                                                      <td class="tblack" style="background:#366fef;text-align:center;color:#fff!important;">
                                                         SN/LN
                                                       </td>
                                                   </tr>
@@ -280,7 +285,13 @@
                                   
                                     
                                     <t t-if="doc.invoice_payment_term_id">
+                                        <br/>
                                         <div t-field="doc.invoice_payment_term_id.note"/>
+                                    </t>
+
+                                    <t t-if="doc.narration">
+                                        <br/>
+                                        <div t-field="doc.narration"/>
                                     </t>
                                     
                                     
@@ -306,7 +317,12 @@
                                             
 
                                             <t t-foreach="tax_totals['groups_by_subtotal'][subtotal_to_show]" t-as="amount_by_group">
-                                                <tr>
+
+
+
+
+
+                                                <tr t-if="doc.display_ITBIS">
                                                     <t t-if="tax_totals['display_tax_base']">
                                                         <td style="">
                                                             <span t-esc="amount_by_group['tax_group_name']"/>
@@ -385,27 +401,6 @@
                                 </div>
                             </div>
                         
-                      
-                        <div class="row" style="margin-top:30px">
-                            <div class="col-6 text-center" style="padding-left:25px;padding-right:25px;padding-top:40px;">
-                                <hr style="height;2px"/>
-                                <br/>Preparada Por
-                            </div>
-                            <div class="col-6 text-center" style="padding-left:25px;padding-right:25px;padding-top:40px;">
-                                <hr style="height;2px"/>
-                                <br/>Recibido Por
-                            </div>
-                        </div>   
-                        <div class="row" style="margin-top:10px">
-                            <div class="col-6 text-center" style="padding-left:25px;padding-right:25px;padding-top:40px;">
-                                <hr style="height;2px"/>
-                                <br/>Autorizado Por
-                            </div>
-                            <div class="col-6 text-center" style="padding-left:25px;padding-right:25px;padding-top:40px;">
-                                <hr style="height;2px"/>
-                                <br/>Entregada Por
-                            </div>
-                        </div>   
                     </div>
                 </t>
             </t>
@@ -414,7 +409,7 @@
         <template id="report_custom_invoice">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="doc">
-                    <t t-call="jm_gad_documents.gad_report_custom_invoice" t-lang="doc.partner_id.lang"/>
+                    <t t-call="jm_martydev.martydev_report_custom_invoice" t-lang="doc.partner_id.lang"/>
                 </t>
             </t>
         </template>

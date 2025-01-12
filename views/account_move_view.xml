@@ -5,10 +5,7 @@
         <field name="inherit_id" ref="account.view_move_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='invoice_date']" position="after">
-                <field name="purchase_order_id" readonly="1" string="Orden de Compra del Sistema"/>
-            </xpath>
-            <xpath expr="//field[@name='invoice_date']" position="after">
-                <field name="custom_po" />
+                <field name="display_ITBIS" />
             </xpath>
         </field>
     </record>

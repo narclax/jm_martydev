@@ -27,6 +27,33 @@
             <field name="binding_type">report</field>
         </record>
 
+        <record id="martydev_account_invoice" model="ir.actions.report">
+            <field name="name">Factura MartyDev</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="paperformat_id" ref="paperformat_custom_martydev"/>
+            <field name="report_name">jm_martydev.report_custom_invoice</field>
+            <field name="report_file">jm_martydev.report_custom_invoice</field>
+            <field name="print_report_name">(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')</field>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <!--
+        <report
+            id="account.martydev_account_invoice"
+            model="account.move"
+            string="Factura MartyDev"
+            report_type="qweb-pdf"
+            name="jm_martydev.report_custom_invoice"
+            file="jm_martydev.report_custom_invoice"
+            attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"
+            paperformat="paperformat_custom_martydev"
+            print_report_name="(object._get_report_base_filename())"
+            groups="account.group_account_invoice"
+        />
+        -->
+
         <!--
         <report
             id="purchase.gad_account_purchase_order"
@@ -54,18 +81,7 @@
             groups="account.group_account_invoice"
         />
 
-        <report
-            id="account.gad_account_invoice"
-            model="account.move"
-            string="Factura - Gad"
-            report_type="qweb-pdf"
-            name="jm_martydev.report_custom_invoice"
-            file="jm_martydev.report_custom_invoice"
-            attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"
-            paperformat="paperformat_custom_gad"
-            print_report_name="(object._get_report_base_filename())"
-            groups="account.group_account_invoice"
-        />
+        
 
         -->
 
