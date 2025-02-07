@@ -1,5 +1,5 @@
 # jm_martydev
 
-All reports and Development made for MartyDev V17 Odoo DB.
+All reports and Development made for MartyDev V17 Odoo DB. By Marty
 
 Hoola
